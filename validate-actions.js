@@ -30,7 +30,7 @@ for (const forbidden of [
   }
 }
 
-if (!deployWorkflow.includes("on:\n  release")) {
+if (!/^on:\r?\n  release$/m.test(deployWorkflow)) {
   throw new Error("release workflow trigger boundary drifted");
 }
 if (!deployWorkflow.includes("docker push housewrecker/gaps:latest")) {
