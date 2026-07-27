@@ -20,6 +20,11 @@ for (const [needle, expected] of Object.entries(exactCounts)) {
   }
 }
 
+const java11Lines = combined.match(/^\s+java-version: 11\s*$/gm) || [];
+if (java11Lines.length !== 2) {
+  throw new Error(`expected two JDK 11 feature-line pins, found ${java11Lines.length}`);
+}
+
 for (const forbidden of [
   "actions/checkout@master",
   "actions/setup-node@v1",
