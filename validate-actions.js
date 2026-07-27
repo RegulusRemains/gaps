@@ -33,6 +33,9 @@ for (const forbidden of [
 if (!/^on:\r?\n  release$/m.test(deployWorkflow)) {
   throw new Error("release workflow trigger boundary drifted");
 }
+if (!/^\s{2}workflow_dispatch:\s*$/m.test(testWorkflow)) {
+  throw new Error("manual non-publishing validation trigger is missing");
+}
 if (!deployWorkflow.includes("docker push housewrecker/gaps:latest")) {
   throw new Error("release publication step unexpectedly changed");
 }
